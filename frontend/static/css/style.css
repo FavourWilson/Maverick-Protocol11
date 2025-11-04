@@ -1,0 +1,340 @@
+/* 🌌 GLOBAL RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: whitesmoke;
+  font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+  --neon-blue: #00f7ff;
+  --neon-purple: #d455d8;
+  --gradient-main: linear-gradient(to right, rgb(0, 89, 255), rgb(225, 0, 255));
+  --gradient-hover: linear-gradient(to right, rgba(11, 67, 71, 0.719), hsla(157, 76%, 26%, 0.781));
+  --bg-dark: #000;
+}
+
+/* 🌃 BODY */
+body {
+  background-color: var(--bg-dark);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* 🪩 HERO / COVER SECTION */
+#cover {
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.4), rgba(212, 88, 216, 0.1)),
+    url('/static/images/home.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding: 2em;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* 🌈 LOGO */
+#logo {
+  float: left;
+  height: 7em;
+  width: 7em;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+#logo:hover {
+  transform: scale(1.1) rotate(-2deg);
+  filter: drop-shadow(0 0 15px var(--neon-purple));
+}
+
+/* 🧭 NAVIGATION */
+section ul {
+  list-style: none;
+}
+
+section li a {
+  position: relative;
+  float: left;
+  font-size: 1.2em;
+  text-align: center;
+  margin-left: 1.5em;
+  padding: 0.8em 0.8em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+section li a:hover {
+  border-bottom: 3px solid var(--neon-blue);
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+section li .active {
+  border-bottom: 3px solid var(--neon-blue);
+}
+
+/* 🔍 SEARCH BAR */
+.search-container {
+  margin-top: 0.5em;
+  margin-right: 3em;
+  float: right;
+}
+
+.search-container input[type=text] {
+  width: 30em;
+  padding: 1em;
+  font-size: 1em;
+  border: none;
+  color: whitesmoke;
+  background-image: var(--gradient-main);
+  border-radius: 1em;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.search-container input::placeholder {
+  color: #eee;
+}
+
+.search-container input:focus {
+  box-shadow: 0 0 2em var(--neon-blue);
+  transform: scale(1.02);
+}
+
+.search-container button {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.search-container button img {
+  width: 2.5em;
+  height: 2.5em;
+  transition: transform 0.3s ease;
+}
+.search-container button:hover img {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* 🪩 MAIN TEXT ANIMATION */
+.mainText > h2 {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 20%;
+  font-size: 2em;
+  color: #b3b3b3;
+  animation: fadeInDown 1.5s ease;
+}
+
+.mainText > h1 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 35%;
+  font-size: 6em;
+  background: linear-gradient(to right, var(--neon-purple), var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 2s infinite alternate;
+}
+
+/* 💰 AMOUNT DISPLAY */
+.amount > h3 {
+  position: relative;
+  text-align: center;
+  margin-top: 15%;
+  font-size: 5em;
+  background: -webkit-linear-gradient(var(--neon-purple), rgb(177, 231, 126));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 🧊 STAKE CONTAINER */
+.stakeContainer {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  margin: 5%;
+  color: #8df3eb;
+  background-color: rgba(168, 31, 168, 0.144);
+  backdrop-filter: blur(8px);
+  padding: 5%;
+  border-radius: 1.5em;
+  box-shadow: 0 0 25px rgba(230, 85, 237, 0.2);
+  transition: transform 0.4s ease;
+}
+.stakeContainer:hover {
+  transform: translateY(-5px);
+}
+
+/* 🧩 TAB SYSTEM */
+.tab {
+  overflow: hidden;
+  text-align: center;
+  margin-top: -5%;
+}
+
+/* 📦 STAKE FORM INPUTS (fixed visibility) */
+.loadContent input {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 1em;
+  width: 80%;
+  max-width: 300px;
+  text-align: center;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+.loadContent input:focus {
+  outline: none;
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  background: rgba(0, 247, 255, 0.08);
+}
+
+/* ✨ BUTTONS */
+input, button, select {
+  outline: none;
+}
+
+.stakeSubmit {
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+  border: none;
+  border-radius: 1em;
+  padding: 1em 2em;
+  margin: 1em;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+  transition: all 0.3s ease;
+}
+.stakeSubmit:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 20px var(--neon-purple);
+}
+
+/* 🧾 ACCOUNT DROPDOWN */
+select {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.8em;
+  padding: 0.8em;
+  text-align: center;
+  font-size: 1em;
+  width: 80%;
+  max-width: 300px;
+  transition: 0.3s ease;
+}
+select:focus {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* 💫 FORM BACKGROUND */
+form {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 1em;
+  padding: 2em;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(0, 247, 255, 0.1);
+}
+
+/* 🪙 WALLET FORM */
+#form {
+  margin-left: 8em;
+  margin-bottom: 3em;
+  font-size: 1.2em;
+}
+#form input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 1em;
+  padding: 1em;
+  width: 70vw;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 1em;
+  margin-bottom: 1em;
+  transition: 0.3s;
+}
+#form input:focus {
+  box-shadow: 0 0 2em var(--neon-blue);
+}
+#form input[type=submit] {
+  width: 20vw;
+  background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+#form input[type=submit]:hover {
+  box-shadow: 0 0 25px var(--neon-purple);
+  transform: translateY(-3px);
+}
+
+/* 🔷 BLOCKCHAIN LIST */
+.grid-container1 {
+  background-image: var(--gradient-main);
+  margin: 8em 5em;
+  border-radius: 1em;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(225, 0, 255, 0.3);
+  animation: fadeInUp 1s ease;
+}
+
+.grid-container1 .blockheader {
+  display: grid;
+  grid-template-columns: 1fr 22em;
+  padding: 1em;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.3em;
+  color: #fff;
+}
+
+.grid-container1 .block {
+  display: grid;
+  grid-template-columns: 1fr 15em;
+  padding: 1em;
+  border-top: 0.01em solid rgba(255, 255, 255, 0.2);
+  transition: background 0.3s ease;
+}
+.grid-container1 .block:hover {
+  background-color: rgba(225, 0, 255, 0.2);
+}
+.grid-container1 a {
+  text-decoration: none;
+}
+
+/* 📱 RESPONSIVE FIX */
+@media (max-width: 900px) {
+  .stakeContainer {
+    grid-template-columns: 1fr;
+    gap: 2em;
+    margin: 2em;
+  }
+  #form input {
+    width: 90%;
+  }
+}
+
+/* ✨ ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes glowText {
+  from { text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-purple); }
+  to { text-shadow: 0 0 30px var(--neon-purple), 0 0 60px var(--neon-blue); }
+}

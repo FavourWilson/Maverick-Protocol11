@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %} MAVERICK PROTOCOL {% endblock %}
+
+{% block content %}
+<section class="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-3 gap-12 text-center animate-fadeIn">
+
+  <!-- 💎 Deposit Section -->
+  <div class="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 shadow-lg border border-slate-700 hover:shadow-blue-500/30 transition-all duration-500">
+    <h1 class="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text uppercase">
+      Mavericks Liquidity Protocol
+    </h1>
+
+    <h3 id="staki" class="text-slate-300 mb-8">
+      💰 Current Available <span class="text-cyan-400 font-semibold">USDC</span> Balance:
+      <span class="text-white font-bold">{{ AvailableBal }}</span>
+    </h3>
+
+    <form action="/depositButton" method="post" class="flex flex-col items-center space-y-4">
+      <label for="stakeValue" class="text-slate-400 text-sm font-medium tracking-wide">
+        Enter Amount to Deposit
+      </label>
+      <input 
+        type="number"
+        id="stakeValue"
+        name="depositValue"
+        placeholder="e.g. 100.00"
+        required
+        class="w-full max-w-xs text-center bg-slate-800/80 text-white placeholder-slate-400 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:shadow-cyan-500/40 transition-all duration-300"
+      >
+      <button
+        type="submit"
+        name="submit-button"
+        class="bg-gradient-to-r from-blue-600 to-fuchsia-600 hover:from-blue-500 hover:to-fuchsia-500 text-white font-semibold px-8 py-3 rounded-xl shadow-md hover:shadow-fuchsia-500/40 transform hover:-translate-y-1 transition-all duration-300">
+        🚀 Deposit
+      </button>
+    </form>
+  </div>
+
+  <!-- 👤 Accounts Section -->
+  <div class="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 shadow-lg border border-slate-700 hover:shadow-cyan-500/30 transition-all duration-500">
+    <h1 class="text-2xl font-bold mb-6 text-cyan-400">👤 Select Account</h1>
+    <form method="post">
+      {{ form.Faccounts(class="w-3/4 max-w-xs bg-slate-800/80 text-white border border-slate-700 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-all duration-300") }}
+    </form>
+    <p class="text-slate-400 text-sm mt-4">
+      Changing accounts updates your live token balances.
+    </p>
+  </div>
+
+  <!-- 💸 Withdraw Section -->
+  <div class="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-8 shadow-lg border border-slate-700 hover:shadow-fuchsia-500/30 transition-all duration-500">
+    <h1 class="text-2xl font-bold mb-4 text-cyan-400">Withdraw</h1>
+    <h3 id="unstaki" class="text-slate-300 mb-8">
+      💵 Your Current Deposited <span class="text-cyan-400 font-semibold">USDC</span> Balance:
+      <span class="text-white font-bold">{{ DepositedAmount }}</span>
+    </h3>
+
+    <form action="/withdrawButton" method="post" class="flex flex-col items-center space-y-4">
+      <label for="unstakeValue" class="text-slate-400 text-sm font-medium tracking-wide">
+        Enter Amount to Withdraw
+      </label>
+      <input 
+        type="number"
+        id="unstakeValue"
+        name="withdrawValue"
+        placeholder="e.g. 50.00"
+        required
+        class="w-full max-w-xs text-center bg-slate-800/80 text-white placeholder-slate-400 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:shadow-fuchsia-500/40 transition-all duration-300"
+      >
+      <button
+        type="submit"
+        name="submit-button"
+        class="bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-pink-500 text-white font-semibold px-8 py-3 rounded-xl shadow-md hover:shadow-fuchsia-500/40 transform hover:-translate-y-1 transition-all duration-300">
+        💎 Withdraw
+      </button>
+    </form>
+  </div>
+
+</section>
+
+{% block javascript %}
+<script>
+  const accountSelect = document.getElementById('Faccounts');
+  if (accountSelect) {
+    accountSelect.onchange = () => {
+      fetch('/refresh/' + accountSelect.value)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('staki').innerHTML =
+            `💰 Current Available <span class='text-cyan-400 font-semibold'>USDC</span> Balance: 
+             <span class='text-white font-bold'>${data.currentBal}</span>`;
+          document.getElementById('unstaki').innerHTML =
+            `💵 Your Current Deposited <span class='text-cyan-400 font-semibold'>USDC</span> Balance: 
+             <span class='text-white font-bold'>${data.stakedBalance}</span>`;
+        })
+        .catch(error => console.error('Error:', error));
+    };
+  }
+</script>
+{% endblock %}
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 1.5s ease-in-out;
+  }
+</style>
+{% endblock %}
